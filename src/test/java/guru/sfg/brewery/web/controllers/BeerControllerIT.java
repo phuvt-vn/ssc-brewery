@@ -43,7 +43,7 @@ public class BeerControllerIT extends BaseIT {
 
     @Test
     void initCreationForm1() throws Exception {
-        mockMvc.perform(get("/beers/new").with(httpBasic("admin", "password")))
+        mockMvc.perform(get("/beers/new").with(httpBasic("spring", "guru")))
                 .andExpect(status().isOk())
                 .andExpect(view().name("beers/createBeer"))
                 .andExpect(model().attributeExists("beer"));
