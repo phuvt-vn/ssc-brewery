@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.LdapShaPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import java.security.cert.LDAPCertStoreParameters;
@@ -24,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     PasswordEncoder passwordEncoder(){
-        return new LdapShaPasswordEncoder();
+        return new StandardPasswordEncoder();
     }
 
     @Override
@@ -50,8 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("spring").password("{SSHA}thkx9iTwLGAvtPa+VEBkoVAU951CvRpNPxEwOw==").roles("ADMIN").and()
-                .withUser("user").password("{SSHA}thkx9iTwLGAvtPa+VEBkoVAU951CvRpNPxEwOw==").roles("USER");
+                .withUser("spring").password("9399904b5ae0bce239952c5ef9d9063e42badea9d8dad106f2d9486982b83e7dfb4c1d3c2ab18b4a").roles("ADMIN").and()
+                .withUser("user").password("9399904b5ae0bce239952c5ef9d9063e42badea9d8dad106f2d9486982b83e7dfb4c1d3c2ab18b4a").roles("USER");
     }
 
 

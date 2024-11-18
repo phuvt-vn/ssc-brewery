@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.security.crypto.password.LdapShaPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.util.DigestUtils;
 
 import javax.validation.constraints.AssertTrue;
@@ -35,5 +36,16 @@ public class PasswordEncodingTests {
         String encodedPassword = ldap.encode(PASSWORD);
 
         assertTrue(ldap.matches(PASSWORD, encodedPassword));
+    }
+
+    @Test
+    public void SHA256() {
+        PasswordEncoder sha256 = new StandardPasswordEncoder();
+        System.out.println(sha256.encode(PASSWORD));
+        System.out.println(sha256.encode(PASSWORD));
+
+        String encodedPassword = sha256.encode(PASSWORD);
+
+        assertTrue(sha256.matches(PASSWORD, encodedPassword));
     }
 }
