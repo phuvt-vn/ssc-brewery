@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 /**
  * Created by jt on 6/22/20.
  */
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
+
     private final UserRepository userRepository;
 
     @Transactional
@@ -35,11 +37,13 @@ public class JpaUserDetailsService implements UserDetailsService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> {
             return new UsernameNotFoundException("User name: " + username + " not found");
         });
+
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.getEnabled(), user.getAccountNonExpired(), user.getCredentialsNonExpired(),
-                user.getAccountNonLocked(), covertToSpringAuthorities(user.getAuthorities()));
+                user.getAccountNonLocked(), convertToSpringAuthorities(user.getAuthorities()));
     }
-    private Collection<? extends GrantedAuthority> covertToSpringAuthorities(Set<Authority> authorities) {
+
+    private Collection<? extends GrantedAuthority> convertToSpringAuthorities(Set<Authority> authorities) {
         if (authorities != null && authorities.size() > 0){
             return authorities.stream()
                     .map(Authority::getRole)
